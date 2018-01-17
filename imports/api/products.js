@@ -62,7 +62,7 @@ if (Meteor.isServer) {
         });
 
         // 将总数记录起来供前端使用
-        Count.upsert({ flag: 'product' }, { '$set': { count: result['total'] } });
+        Count.upsert({ flag: 'product' }, { $set: { count: result['total'] } });
 
         return ProductsForSearch.find({}, { sort: { sort: 1 } });
     });
@@ -85,7 +85,7 @@ function refreshDirtyData($dirtyId) {
         return;
     }
 
-    if (ProductsForSearch.remove({ '_id': $dirtyId })) {
+    if (ProductsForSearch.remove({ _id: $dirtyId })) {
         Count.update({ flag: 'product' }, { $inc: { count: -1 } });
     }
 }
